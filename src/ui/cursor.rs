@@ -1,3 +1,4 @@
+use crate::db::config::Config;
 use ratatui::style::{Color, Style};
 use ratatui::text::Span;
 use std::str::FromStr;
@@ -83,7 +84,9 @@ pub trait CursorState {
     }
 
     /// Create text spans for rendering with cursor visualization
-    fn create_cursor_text_spans(&self) -> Vec<Span<'static>> {
+    fn create_cursor_text_spans(&self, config: Config) -> Vec<Span<'static>> {
+        let fg = config.foreground();
+        let bg = config.background();
         let text = self.get_text();
         let cursor_pos = self.get_cursor_pos();
         let chars: Vec<char> = text.chars().collect();
@@ -112,26 +115,26 @@ pub trait CursorState {
         vec![
             Span::styled(
                 text_before,
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
+                Style::default().fg(Color::from_str(fg).unwrap()),
             ),
             if cursor_char == "█" {
                 Span::styled(
                     cursor_char,
                     Style::default()
-                        .fg(Color::from_str("#FCF1D5").unwrap())
-                        .bg(Color::from_str("#002626").unwrap()),
+                        .fg(Color::from_str(fg).unwrap())
+                        .bg(Color::from_str(bg).unwrap()),
                 )
             } else {
                 Span::styled(
                     cursor_char,
                     Style::default()
-                        .fg(Color::from_str("#002626").unwrap())
-                        .bg(Color::from_str("#FCF1D5").unwrap()),
+                        .fg(Color::from_str(bg).unwrap())
+                        .bg(Color::from_str(fg).unwrap()),
                 )
             },
             Span::styled(
                 text_after,
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
+                Style::default().fg(Color::from_str(fg).unwrap()),
             ),
         ]
     }

@@ -1,3 +1,4 @@
+use crate::db::config::Config;
 use crate::db::models::{NewTodoItem, TodoItem, UIItem, UIList};
 use anyhow::Result;
 use ratatui::buffer::Buffer;
@@ -134,35 +135,25 @@ impl ItemsComponent {
     }
 
     /// Render the list of todo items for the selected list
-    pub fn render(selected_list: Option<&mut UIList>, area: Rect, buf: &mut Buffer) {
+    pub fn render(
+        selected_list: Option<&mut UIList>,
+        area: Rect,
+        buf: &mut Buffer,
+        config: Config,
+    ) {
+        let fg = config.foreground();
+        let hl = config.highlight();
+        let bg = config.background();
         // Command hints for items
         let list_command_hints = Line::from(vec![
             Span::raw(" "),
             Span::styled(" ↓↑ ", Style::default()),
-            Span::styled(
-                "[a]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "dd",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
-            Span::styled(
-                " [d]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "el",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
-            Span::styled(
-                " [m]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "odify ",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
+            Span::styled("[a]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("dd", Style::default().fg(Color::from_str(fg).unwrap())),
+            Span::styled(" [d]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("el", Style::default().fg(Color::from_str(fg).unwrap())),
+            Span::styled(" [m]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("odify ", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])
         .left_aligned();
@@ -170,14 +161,8 @@ impl ItemsComponent {
         // Add "quit" hint, in the bottom right corner
         let quit_hint = Line::from(vec![
             Span::raw(" "),
-            Span::styled(
-                "[q]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "uit ",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
+            Span::styled("[q]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("uit ", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])
         .right_aligned();
@@ -205,8 +190,8 @@ impl ItemsComponent {
                 .highlight_style(
                     // Swap foreground and background for selected item
                     Style::default()
-                        .bg(Color::from_str("#FCF1D5").unwrap())
-                        .fg(Color::from_str("#002626").unwrap()),
+                        .bg(Color::from_str(fg).unwrap())
+                        .fg(Color::from_str(bg).unwrap()),
                 )
                 .highlight_spacing(HighlightSpacing::Always);
 

@@ -7,11 +7,17 @@ use std::path::PathBuf;
 const DEFAULT_DB_NAME: &str = "dojo";
 const DEFAULT_DB_FILE: &str = "judo.db";
 
+const DEFAULT_FG_COLOUR: &str = "#FCF1D5";
+const DEFAULT_HL_COLOUR: &str = "#FFA69E";
+const DEFAULT_BG_COLOUR: &str = "#002626";
+
 /// Config file definition
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct Config {
     pub default: String,
     pub dbs: Vec<DBConfig>,
+    #[serde(default)]
+    pub colours: Theme,
 }
 
 /// Database configuration
@@ -19,6 +25,23 @@ pub struct Config {
 pub struct DBConfig {
     pub name: String,
     pub connection_str: String,
+}
+
+#[derive(Deserialize, Serialize, Clone)]
+pub struct Theme {
+    pub background: String,
+    pub foreground: String,
+    pub highlight: String,
+}
+
+impl Default for Theme {
+    fn default() -> Self {
+        Self {
+            background: DEFAULT_BG_COLOUR.to_string(),
+            foreground: DEFAULT_FG_COLOUR.to_string(),
+            highlight: DEFAULT_HL_COLOUR.to_string(),
+        }
+    }
 }
 
 impl Default for DBConfig {
@@ -48,6 +71,7 @@ impl Default for Config {
         Self {
             default: DEFAULT_DB_NAME.to_string(),
             dbs: vec![DBConfig::default()],
+            colours: Theme::default(),
         }
     }
 }
@@ -103,6 +127,18 @@ impl Config {
         .with_context(|| "Failed to serialize into struct")?;
 
         Ok(judo_config)
+    }
+
+    pub fn foreground(&self) -> &str {
+        &self.colours.foreground
+    }
+
+    pub fn highlight(&self) -> &str {
+        &self.colours.highlight
+    }
+
+    pub fn background(&self) -> &str {
+        &self.colours.background
     }
 
     /// Get config of default database

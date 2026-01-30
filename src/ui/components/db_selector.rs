@@ -1,4 +1,5 @@
 pub struct DBSelector;
+use crate::db::config::Config;
 use ratatui::buffer::Buffer;
 use ratatui::layout::{Alignment, Rect};
 use ratatui::style::{Color, Style};
@@ -7,18 +8,15 @@ use ratatui::widgets::{Block, BorderType, Borders, Padding, Paragraph, Widget};
 use std::str::FromStr;
 
 impl DBSelector {
-    pub fn render(area: Rect, buf: &mut Buffer, current_db_name: &str) {
+    pub fn render(area: Rect, buf: &mut Buffer, current_db_name: &str, config: Config) {
+        let fg = config.foreground();
+        let hl = config.highlight();
+
         // Command hints for db
         let list_command_hints = Line::from(vec![
             Span::raw(" "),
-            Span::styled(
-                "[C]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "hange",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
+            Span::styled("[C]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("hange", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])
         .left_aligned();

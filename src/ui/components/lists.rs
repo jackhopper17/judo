@@ -1,3 +1,4 @@
+use crate::db::config::Config;
 use crate::db::models::{NewTodoList, TodoList, UIList};
 use anyhow::Result;
 use ratatui::buffer::Buffer;
@@ -177,35 +178,20 @@ impl ListsComponent {
     }
 
     /// Render the list of todo lists
-    pub fn render(&mut self, area: Rect, buf: &mut Buffer) {
+    pub fn render(&mut self, area: Rect, buf: &mut Buffer, config: Config) {
+        let fg = config.foreground();
+        let hl = config.highlight();
+        let bg = config.background();
         // Command hints for lists
         let list_command_hints = Line::from(vec![
             Span::raw(" "),
             Span::styled(" w,s ", Style::default()),
-            Span::styled(
-                "[A]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "dd",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
-            Span::styled(
-                " [D]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "el",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
-            Span::styled(
-                " [M]",
-                Style::default().fg(Color::from_str("#FFA69E").unwrap()),
-            ),
-            Span::styled(
-                "odify ",
-                Style::default().fg(Color::from_str("#FCF1D5").unwrap()),
-            ),
+            Span::styled("[A]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("dd", Style::default().fg(Color::from_str(fg).unwrap())),
+            Span::styled(" [D]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("el", Style::default().fg(Color::from_str(fg).unwrap())),
+            Span::styled(" [M]", Style::default().fg(Color::from_str(hl).unwrap())),
+            Span::styled("odify ", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])
         .left_aligned();
@@ -231,8 +217,8 @@ impl ListsComponent {
             .highlight_style(
                 // Swap foreground and background for selected item
                 Style::default()
-                    .bg(Color::from_str("#FCF1D5").unwrap())
-                    .fg(Color::from_str("#002626").unwrap()),
+                    .bg(Color::from_str(fg).unwrap())
+                    .fg(Color::from_str(bg).unwrap()),
             )
             .highlight_spacing(HighlightSpacing::Always);
 
