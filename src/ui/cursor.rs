@@ -1,7 +1,7 @@
+use crate::db::config::Config;
 use ratatui::style::{Color, Style};
 use ratatui::text::Span;
 use std::str::FromStr;
-use crate::db::config::Config;
 
 /// Trait for managing cursor-based text input
 pub trait CursorState {

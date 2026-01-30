@@ -348,11 +348,17 @@ impl Widget for &mut App {
             self.current_screen,
             CurrentScreen::ChangeDB | CurrentScreen::AddDB
         ) {
-            DBSelector::render(closed_selector_area, buf, &self.current_db_config.name, self.config.clone());
+            DBSelector::render(
+                closed_selector_area,
+                buf,
+                &self.current_db_config.name,
+                self.config.clone(),
+            );
         }
 
         // Render the main areas
-        self.lists_component.render(lists_area, buf, self.config.clone());
+        self.lists_component
+            .render(lists_area, buf, self.config.clone());
 
         // Render items with the selected list
         let selected_list = self.lists_component.get_selected_list_mut();
@@ -360,18 +366,27 @@ impl Widget for &mut App {
 
         // Render popup screens if active
         match self.current_screen {
-            CurrentScreen::AddList => AddListPopUp::render(self.config.clone(), &self.input_state, lists_area, buf),
+            CurrentScreen::AddList => {
+                AddListPopUp::render(self.config.clone(), &self.input_state, lists_area, buf)
+            }
             CurrentScreen::ModifyList => {
                 ModifyListPopUp::render(self.config.clone(), &self.input_state, lists_area, buf)
             }
-            CurrentScreen::AddItem => AddItemPopUp::render(self.config.clone(), &self.input_state, items_area, buf),
+            CurrentScreen::AddItem => {
+                AddItemPopUp::render(self.config.clone(), &self.input_state, items_area, buf)
+            }
             CurrentScreen::ModifyItem => {
                 ModifyItemPopUp::render(self.config.clone(), &self.input_state, items_area, buf)
             }
             CurrentScreen::ChangeDB => {
                 ChangeDBPopUp::render(&self.config, self.selected_db_index, db_selector_area, buf)
             }
-            CurrentScreen::AddDB => AddDBPopUp::render(self.config.clone(), &self.input_state, db_selector_area, buf),
+            CurrentScreen::AddDB => AddDBPopUp::render(
+                self.config.clone(),
+                &self.input_state,
+                db_selector_area,
+                buf,
+            ),
             _ => {}
         }
     }

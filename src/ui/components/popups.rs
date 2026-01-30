@@ -20,15 +20,12 @@ fn render_list_popup_kernel<T: CursorState>(
     popup_title: &str,
 ) {
     let fg = config.foreground();
-    let fg_a = config.foreground_alt();
+    let fg_a = config.highlight();
     let bg = config.background();
     // Command hints for add list popup
     let add_or_modify_list_command_hints = Line::from(vec![
         Span::raw(" "),
-        Span::styled(
-            "[Esc]",
-            Style::default().fg(Color::from_str(fg_a).unwrap()),
-        ),
+        Span::styled("[Esc]", Style::default().fg(Color::from_str(fg_a).unwrap())),
         // Span::styled(
         //     "sc",
         //     Style::default().fg(Color::from_str(fg).unwrap()),
@@ -108,15 +105,12 @@ pub fn render_item_popup_kernel<T: CursorState>(
     popup_title: &str,
 ) {
     let fg = config.foreground();
-    let fg_a = config.foreground_alt();
+    let fg_a = config.highlight();
     let bg = config.background();
     // Command hints for add item popup
     let add_item_command_hints = Line::from(vec![
         Span::raw(" "),
-        Span::styled(
-            "[Esc]",
-            Style::default().fg(Color::from_str(fg_a).unwrap()),
-        ),
+        Span::styled("[Esc]", Style::default().fg(Color::from_str(fg_a).unwrap())),
         // Span::styled(
         //     "sc",
         //     Style::default().fg(Color::from_str(fg).unwrap()),
@@ -190,24 +184,15 @@ impl ChangeDBPopUp {
     /// Render popup for selecting database
     pub fn render(config: &Config, selected_index: usize, area: Rect, buf: &mut Buffer) {
         let fg = config.foreground();
-        let fg_a = config.foreground_alt();
+        let fg_a = config.highlight();
         let bg = config.background();
         // Command hints for change db popup
         let change_db_command_hints = Line::from(vec![
             Span::raw(" "),
             Span::styled(" ↑↓ ", Style::default()),
-            Span::styled(
-                "[A]",
-                Style::default().fg(Color::from_str(fg_a).unwrap()),
-            ),
-            Span::styled(
-                "dd",
-                Style::default().fg(Color::from_str(fg).unwrap()),
-            ),
-            Span::styled(
-                " [S]",
-                Style::default().fg(Color::from_str(fg_a).unwrap()),
-            ),
+            Span::styled("[A]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled("dd", Style::default().fg(Color::from_str(fg).unwrap())),
+            Span::styled(" [S]", Style::default().fg(Color::from_str(fg_a).unwrap())),
             Span::styled(
                 "et Default",
                 Style::default().fg(Color::from_str(fg).unwrap()),
@@ -270,15 +255,12 @@ impl AddDBPopUp {
     /// Render popup for entering a new database name
     pub fn render<T: CursorState>(config: Config, state: &T, area: Rect, buf: &mut Buffer) {
         let fg = config.foreground();
-        let fg_a = config.foreground_alt();
+        let fg_a = config.highlight();
         let bg = config.background();
         // Command hints for add db popup
         let add_db_command_hints = Line::from(vec![
             Span::raw(" "),
-            Span::styled(
-                "[Esc]",
-                Style::default().fg(Color::from_str(fg_a).unwrap()),
-            ),
+            Span::styled("[Esc]", Style::default().fg(Color::from_str(fg_a).unwrap())),
             Span::raw(" "),
         ]);
 

@@ -1,9 +1,9 @@
+use crate::db::config::Config;
 use ratatui::buffer::Buffer;
 use ratatui::layout::{Constraint, Layout, Margin, Rect};
 use ratatui::style::{Color, Style};
 use ratatui::widgets::{Block, Widget};
 use std::str::FromStr;
-use crate::db::config::Config;
 
 pub struct AppLayout;
 

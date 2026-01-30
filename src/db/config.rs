@@ -8,7 +8,7 @@ const DEFAULT_DB_NAME: &str = "dojo";
 const DEFAULT_DB_FILE: &str = "judo.db";
 
 const DEFAULT_FG_COLOUR: &str = "#FCF1D5";
-const DEFAULT_FG_ALT_COLOUR: &str = "#FFA69E";
+const DEFAULT_HL_COLOUR: &str = "#FFA69E";
 const DEFAULT_BG_COLOUR: &str = "#002626";
 
 /// Config file definition
@@ -16,6 +16,7 @@ const DEFAULT_BG_COLOUR: &str = "#002626";
 pub struct Config {
     pub default: String,
     pub dbs: Vec<DBConfig>,
+    #[serde(default)]
     pub colours: Theme,
 }
 
@@ -30,15 +31,15 @@ pub struct DBConfig {
 pub struct Theme {
     pub background: String,
     pub foreground: String,
-    pub foreground_alt: String
+    pub highlight: String,
 }
 
 impl Default for Theme {
     fn default() -> Self {
-        Self { 
-            background: DEFAULT_BG_COLOUR.to_string(), 
+        Self {
+            background: DEFAULT_BG_COLOUR.to_string(),
             foreground: DEFAULT_FG_COLOUR.to_string(),
-            foreground_alt: DEFAULT_FG_ALT_COLOUR.to_string()
+            highlight: DEFAULT_HL_COLOUR.to_string(),
         }
     }
 }
@@ -132,8 +133,8 @@ impl Config {
         &self.colours.foreground
     }
 
-    pub fn foreground_alt(&self) -> &str {
-        &self.colours.foreground_alt
+    pub fn highlight(&self) -> &str {
+        &self.colours.highlight
     }
 
     pub fn background(&self) -> &str {
