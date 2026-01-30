@@ -180,17 +180,17 @@ impl ListsComponent {
     /// Render the list of todo lists
     pub fn render(&mut self, area: Rect, buf: &mut Buffer, config: Config) {
         let fg = config.foreground();
-        let fg_a = config.highlight();
+        let hl = config.highlight();
         let bg = config.background();
         // Command hints for lists
         let list_command_hints = Line::from(vec![
             Span::raw(" "),
             Span::styled(" w,s ", Style::default()),
-            Span::styled("[A]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled("[A]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("dd", Style::default().fg(Color::from_str(fg).unwrap())),
-            Span::styled(" [D]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled(" [D]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("el", Style::default().fg(Color::from_str(fg).unwrap())),
-            Span::styled(" [M]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled(" [M]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("odify ", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])

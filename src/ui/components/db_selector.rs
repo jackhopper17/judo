@@ -10,12 +10,12 @@ use std::str::FromStr;
 impl DBSelector {
     pub fn render(area: Rect, buf: &mut Buffer, current_db_name: &str, config: Config) {
         let fg = config.foreground();
-        let fg_a = config.highlight();
+        let hl = config.highlight();
 
         // Command hints for db
         let list_command_hints = Line::from(vec![
             Span::raw(" "),
-            Span::styled("[C]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled("[C]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("hange", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])

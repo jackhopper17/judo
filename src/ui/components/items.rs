@@ -142,17 +142,17 @@ impl ItemsComponent {
         config: Config,
     ) {
         let fg = config.foreground();
-        let fg_a = config.highlight();
+        let hl = config.highlight();
         let bg = config.background();
         // Command hints for items
         let list_command_hints = Line::from(vec![
             Span::raw(" "),
             Span::styled(" ↓↑ ", Style::default()),
-            Span::styled("[a]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled("[a]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("dd", Style::default().fg(Color::from_str(fg).unwrap())),
-            Span::styled(" [d]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled(" [d]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("el", Style::default().fg(Color::from_str(fg).unwrap())),
-            Span::styled(" [m]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled(" [m]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("odify ", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])
@@ -161,7 +161,7 @@ impl ItemsComponent {
         // Add "quit" hint, in the bottom right corner
         let quit_hint = Line::from(vec![
             Span::raw(" "),
-            Span::styled("[q]", Style::default().fg(Color::from_str(fg_a).unwrap())),
+            Span::styled("[q]", Style::default().fg(Color::from_str(hl).unwrap())),
             Span::styled("uit ", Style::default().fg(Color::from_str(fg).unwrap())),
             Span::raw(" "),
         ])
