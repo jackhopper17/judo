@@ -122,13 +122,13 @@ Navigate between lists and items using the keyboard. You can switch between diff
 
 ## Configuration
 
-Judo uses a configuration file to manage multiple databases. The configuration is stored in:
+Judo uses a configuration file to manage multiple databases and colour themes. The configuration is stored in:
 
 - **Ubuntu**: `~/.config/judo/judo.toml`
 - **macOS**: `~/Library/Application Support/judo/`
 - **Windows**: `%APPDATA%\judo\judo.toml`
 
-The configuration file is automatically created on first run with a default database. You can add new databases through the UI or manually edit the configuration file. The default database is called "dojo". 
+The configuration file is automatically created on first run with a default database. You can add new databases through the UI or manually edit the configuration file. The default database is called "dojo". Similarly, Judo comes equipped with a default colour theme (background: *dark green*, foreground: *white-ish*, highlight: *reddish*) which you can alter in the config file. 
 
 ### Example Configuration
 
