@@ -72,7 +72,7 @@ Navigate between lists and items using the keyboard. You can switch between diff
 ### Command line usage
 Judo also provides subcommands for usage on the command line or inside of shell scripts. Add `help`, `-h`, or `--help` to any subcommand to show its usage:
 
-```bash
+```
 $ judo help
 Judo - TUI for ToDo lists
 
@@ -87,6 +87,15 @@ Commands:
 Options:
   -h, --help     Print help
   -V, --version  Print version
+```
+#### Example:
+```
+$ judo lists show
+Name          ID  DB          No of items
+----          --  --          -----------
+home          1   dojo        2
+work          2   dojo        3
+another list  1   another db  1
 ```
 
 ## Key Bindings
