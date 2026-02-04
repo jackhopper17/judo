@@ -120,6 +120,26 @@ Navigate between lists and items using the keyboard. You can switch between diff
 | `←` | Move cursor left |
 | `→` | Move cursor right |
 
+### Command line usage
+Judo also provides subcommands for usage on the command line or inside of shell scripts. Add `help`, `-h`, or `--help` to any subcommand to show its usage:
+
+```bash
+$ judo help
+Judo - TUI for ToDo lists
+
+Usage: judo [COMMAND]
+
+Commands:
+  dbs    Manage databases
+  lists  Manage todo lists
+  items  Manage todo items
+  help   Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+```
+
 ## Configuration
 
 Judo uses a configuration file to manage multiple databases and colour themes. The configuration is stored in:
